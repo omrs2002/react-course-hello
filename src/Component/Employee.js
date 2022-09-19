@@ -1,13 +1,12 @@
 function Employee(props) {
     return(
         <>
-        <h3> Eployee Name : {props.name}</h3>
-            <h4> role : {props.role ? props.role : ' --no role--'}</h4>
-            {props.role ? <p>{props.role}</p> : <p>--no role--</p>}
-            <hr></hr>
-
+        <div className="rounded-lg bg-blue-100 m-5">
+        <h3> Eployee Name : {props.name} -  {props.role ? <p>Role is : {props.role}</p> : <p>--no role--</p>} </h3>
+        <br/>
+        <button className="px-4">Update</button>
+        </div>
         </>
-        
     );
 }
 export default Employee;

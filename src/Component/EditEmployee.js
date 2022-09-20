@@ -31,7 +31,15 @@ function EditEmployee(props) {
                     <Modal.Title>Edit Employee :{props.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form id="editmodal" className="w-full max-w-sm">
+                    <form id="editmodal" className="w-full max-w-sm"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        console.log('hellow from edit emp.');
+                        props.updateEmployee(props.id,name,role);
+                        setShow(false);
+
+                    }}
+                    >
                         <div className="md:flex md:items-center mb-6">
                             <div className="md:w-1/3">
                                 <label

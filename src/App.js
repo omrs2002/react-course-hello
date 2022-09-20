@@ -3,8 +3,22 @@ import Employee from './Component/Employee';
 import { useEffect, useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
 
+
+
 function App() {
-    const showEmployees = true;
+
+    function updateEmployee(id, newName, newRole) {
+        const updatedEmployees = employees.map((employee) => {
+            if (id == employee.id) {
+                return { ...employee, name: newName, role: newRole };
+            }
+
+            return employee;
+        });
+        setEmployees(updatedEmployees);
+    }
+
+    const showEmployees = false;
     const [role, SetRole] = useState('dev');
     const [employees, setEmployees] = useState([
       {
@@ -26,8 +40,16 @@ function App() {
 
     ]);
     const listItems = employees.map((emp) => {
-      console.log(emp.id);
-        return <Employee key={uuidv4()} name={emp.name} role={emp.role} img={emp.img} />;
+      //console.log(emp.id);
+        return <Employee 
+        //key={uuidv4()} 
+        key={emp.id} 
+        id={emp.id} 
+        name={emp.name} 
+        role={emp.role} 
+        img={emp.img}
+        updateEmployee = {updateEmployee}
+        />;
     });
 
     

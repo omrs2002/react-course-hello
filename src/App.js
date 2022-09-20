@@ -21,22 +21,8 @@ function App() {
         name: 'John',
         role: 'Director of Eng.',
         img: 'https://cdn2.iconfinder.com/data/icons/avatars-60/5985/36-Grandfather-128.png',
-    },
-    {
-        name: 'Melanie',
-        role: 'Software Engineer',
-        img: 'https://cdn4.iconfinder.com/data/icons/sketchy-basic-icons/95/smile-128.png',
-    },
-    {
-        name: 'Corey',
-        role: 'The Devops Guy',
-        img: 'https://cdn2.iconfinder.com/data/icons/avatars-60/5985/19-Journalist-128.png',
-    },
-    {
-        name: 'Jake',
-        role: 'Senior',
-        img: 'https://cdn2.iconfinder.com/data/icons/avatars-60/5985/36-Grandfather-128.png'
     }
+
     ]);
     const listItems = employees.map((emp) => {
       console.log(emp.id);
@@ -50,6 +36,7 @@ function App() {
                 <span>
                     <h1 className="text-3xl font-bold underline bg-red-300">
                         Welocme to react
+                        <hr />
                     </h1>
                     {showEmployees ? (
                         <>

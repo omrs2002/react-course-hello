@@ -2,6 +2,8 @@ import './Index.css';
 import Employee from './Component/Employee';
 import { useState } from 'react';
 import AddEmployee from './Component/AddEmployee';
+import EditEmployee from './Component/EditEmployee';
+
 import {v4 as uuidv4 } from 'uuid';
 
 
@@ -28,8 +30,8 @@ function App() {
         setEmployees([...employees,newEmp]);
     }
 
-    const showEmployees = false;
-    const [role, SetRole] = useState('dev');
+    //const showEmployees = false;
+    //const [role, SetRole] = useState('dev');
     const [employees, setEmployees] = useState([
       {
         id:1,
@@ -51,14 +53,22 @@ function App() {
     ]);
     const listItems = employees.map((emp) => {
       //console.log(emp.id);
-        return <Employee 
-        //key={uuidv4()} 
-        key={emp.id} 
+      const editEmployee = <EditEmployee 
+       key={emp.id} 
         id={emp.id} 
         name={emp.name} 
         role={emp.role} 
         img={emp.img}
         updateEmployee = {updateEmployee}
+      />;
+
+        return <Employee 
+        key={emp.id} 
+        id={emp.id} 
+        name={emp.name} 
+        role={emp.role} 
+        img={emp.img}
+        editEmployee = {editEmployee}
         />;
     });
 
@@ -71,7 +81,7 @@ function App() {
                         Welocme to react
                         <hr />
                     </h1>
-                    {showEmployees ? (
+                    {/* {showEmployees ? (
                         <>
                             Enter role:
                             <input
@@ -86,7 +96,7 @@ function App() {
                         </>
                     ) : (
                         <p>no Employees!</p>
-                    )}
+                    )} */}
                     <hr />
                     <div className="flex flex-wrap justify-center">
                         {listItems}

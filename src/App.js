@@ -3,7 +3,7 @@ import Employee from './Component/Employee';
 import { useState } from 'react';
 import AddEmployee from './Component/AddEmployee';
 import EditEmployee from './Component/EditEmployee';
-
+import Header from './Component/Header';
 import {v4 as uuidv4 } from 'uuid';
 
 
@@ -75,29 +75,9 @@ function App() {
     
     return (
         <div className="App">
+             <Header />
             <header className="App-header">
                 <span>
-                    <h1 className="text-3xl font-bold bg-blue-200">
-                        Welocme to react
-                        <hr />
-                    </h1>
-                    {/* {showEmployees ? (
-                        <>
-                            Enter role:
-                            <input
-                                type="text"
-                                onChange={(e) => {
-                                    SetRole(e.target.value);
-                                }}
-                                className="text-1xl font-bold bg-gray-300"
-                            ></input>
-                            <br />
-                            <Employee name="Omar Abuhadid" role={role} img='https://cdn0.iconfinder.com/data/icons/avatar-2/500/spike-128.png' />
-                        </>
-                    ) : (
-                        <p>no Employees!</p>
-                    )} */}
-                    <hr />
                     <div className="flex flex-wrap justify-center">
                         {listItems}
                     </div>

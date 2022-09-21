@@ -2,12 +2,11 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import {NavLink} from 'react-router-dom'
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Employees', href: '/Employees' },
+    { name: 'Customers', href: '/Customers'}
 ];
 
 function classNames(...classes) {
@@ -173,6 +172,7 @@ export default function Header(props) {
                         </div>
                     </Disclosure.Panel>
                     {props.children}
+                    <footer>© 2022 Employees System, Inc.</footer>
                 </>
             )}
         </Disclosure>

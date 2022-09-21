@@ -90,13 +90,9 @@ function Employees() {
                         addEmployee={addEmployee}
                         />
                         </div>
-                    
-                    
                 </span>
             </header>
-
         </div>
     );
 }
-
 export default Employees;

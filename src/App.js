@@ -1,8 +1,8 @@
 import './Index.css';
 import Employee from './Component/Employee';
-import { useEffect, useState } from 'react';
-import {v4 as uuidv4} from 'uuid';
-
+import { useState } from 'react';
+import AddEmployee from './Component/AddEmployee';
+import {v4 as uuidv4 } from 'uuid';
 
 
 function App() {
@@ -16,6 +16,16 @@ function App() {
             return employee;
         });
         setEmployees(updatedEmployees);
+    }
+
+    function addEmployee(name,role,img) {
+        let newEmp = {
+            id:uuidv4(),
+            name: name,
+            role: role,
+            img: img,
+        };
+        setEmployees([...employees,newEmp]);
     }
 
     const showEmployees = false;
@@ -81,8 +91,17 @@ function App() {
                     <div className="flex flex-wrap justify-center">
                         {listItems}
                     </div>
+                    <br />
+                    <div className="flex flex-wrap justify-center">
+                        <AddEmployee
+                        addEmployee={addEmployee}
+                        />
+                        </div>
+                    
+                    
                 </span>
             </header>
+
         </div>
     );
 }

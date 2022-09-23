@@ -7,15 +7,16 @@ import Customers from './Pages/Customers';
 function App() {
     return (
     <>
-        <Header>
-            <BrowserRouter>
-            <Routes>
-                <Route path='/Employees' element={<Employees />}/>
-                <Route path='/Customers' element={<Customers />}/>
-            </Routes>
-            </BrowserRouter>
-            
-        </Header>
+         <BrowserRouter>
+            <Header>
+                <Routes>
+                   <Route path="/employees" element={<Employees />} />
+                    <Route path="/customers" element={<Customers />} />
+                    
+                </Routes>
+                
+            </Header>
+        </BrowserRouter>
     </>)
     ;
 }

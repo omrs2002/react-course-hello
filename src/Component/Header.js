@@ -1,19 +1,18 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+//import { Fragment } from 'react';
+import { Disclosure } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { NavLink } from 'react-router-dom';
 
 const navigation = [
     { name: 'Employees', href: '/Employees' },
     { name: 'Customers', href: '/Customers' },
-    { name: 'Projects', href: '/other' },
-    { name: 'Calendar', href: '/other2' },
+    { name: 'Dictionary', href: '/dictionary' }
 ];
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
-}
+// function classNames(...classes) {
+//     return classes.filter(Boolean).join(' ');
+// }
 
 export default function Header(props) {
     return (

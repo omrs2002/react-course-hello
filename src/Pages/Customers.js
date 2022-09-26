@@ -3,6 +3,11 @@ import { useEffect } from "react";
 
 function Customers() {
 
+    const [x1, setX1] = useState(() => {
+        return 1;
+      });
+
+
     const [cnt,setCnt] = useState(0);
 
     useEffect(() => {

@@ -31,8 +31,9 @@ export default function Definition(){
 
     return (
         <>
-            <h1>Here is a definition of {search}:</h1>
-            { word?.map((meaning) => {
+            <h1>Here is a definition:</h1>
+            {word
+                ? word.map((meaning) => {
                       return (
                         
                           <li key={uuidv4()}>
@@ -40,23 +41,7 @@ export default function Definition(){
                           </li>
                       );
                   })
-                }
+                : <p>Loading ...</p>}
         </>
     );
-
-    // return (
-    //     <>
-    //         <h1>Here is a definition:</h1>
-    //         {word
-    //             ? word.map((meaning) => {
-    //                   return (
-                        
-    //                       <li key={uuidv4()}>
-    //                           {meaning.partOfSpeech + ': ' + meaning.definitions[0].definition}
-    //                       </li>
-    //                   );
-    //               })
-    //             : null}
-    //     </>
-    // );
 }

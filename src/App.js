@@ -6,6 +6,7 @@ import Customers from './Pages/Customers';
 import Dictionary from './Pages/Dictionary';
 import Definition from './Pages/Definition';
 import NewDictionary from './Pages/NewDictionary';
+import Page404 from './Pages/404';
 
 function App() {
     return (
@@ -18,6 +19,8 @@ function App() {
                    <Route path="/newdictionary" element={<NewDictionary />} />
                     <Route path="/customers" element={<Customers />} />
                     <Route path="/definition/:search" element={<Definition />} />
+                    <Route path="/404" element={<Page404 />} />
+                    <Route path="*" element={<Page404 />} />
                 </Routes>
                 
             </Header>

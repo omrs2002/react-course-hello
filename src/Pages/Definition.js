@@ -14,7 +14,10 @@ export default function Definition() {
     //const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
-        const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + search;
+        let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + search;
+        if(search === '500')
+        url = 'http://httpstat.us/501';
+
         //const url = 'http://https90870987ta908798.us/401';
         //const url = 'http://httpstat.us/501';
 

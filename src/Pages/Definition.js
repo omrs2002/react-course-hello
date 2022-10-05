@@ -28,7 +28,8 @@ export default function Definition() {
                     setError(true);
                 }
                 console.log(response.status);
-                if (response.status === 200) return response.json();
+                if (response.status === 200) 
+                    return response.json();
                 else if (response.status === 404) {
                     setNotFound(true);
                     console.log('we got 401 status !');

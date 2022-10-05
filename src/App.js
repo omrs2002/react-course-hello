@@ -18,6 +18,7 @@ function App() {
                    <Route path="/dictionary" element={<Dictionary />} />
                    <Route path="/newdictionary" element={<NewDictionary />} />
                     <Route path="/customers" element={<Customers />} />
+                    <Route path="/customers/:id" element={<Customers />} />
                     <Route path="/definition/:search" element={<Definition />} />
                     <Route path="/404" element={<Page404 />} />
                     <Route path="*" element={<Page404 />} />

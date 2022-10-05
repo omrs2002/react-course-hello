@@ -1,27 +1,37 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
-function Customers() {
-
-    const [x1, setX1] = useState(() => {
-        return 1;
-      });
-
-
-    const [cnt,setCnt] = useState(0);
+export default function Customers() {
+    const [customers, setCustomers] = useState();
 
     useEffect(() => {
-        document.title = `You clicked hello ${cnt} times`;
-      });
+        console.log('Fetching...');
+        fetch('https://localhost:7281/Customers')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setCustomers(data);
+            });
+    }, []);
 
     return (
-    <>
-    <div className="App bg-gray-300 min-h-screen">
-        <center><h1>Hello Customers</h1></center>
-        <button type="button" onClick={()=>{setCnt(cnt+1)}} >click!</button>
-    </div>
-    </>)
-};
-
-
-export default Customers;
+        <>
+            <h1>Here are our customer:</h1>
+            {customers
+                ? customers.map((customer, index) => {
+                      return (
+                          <li key={customer.id}>
+                              <Link
+                                  key={index}
+                                  to={'/customers/' + customer.id}
+                              >
+                                  {customer.name}
+                              </Link>
+                          </li>
+                      );
+                  })
+                : null}
+        </>
+    );
+}

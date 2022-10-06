@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 //import NotFound from '../components/NotFound';
 import { baseUrl } from '../shared';
 
+
 export default function Customer() {
     const { id } = useParams();
     //const navigate = useNavigate(); //not used
@@ -23,7 +24,7 @@ export default function Customer() {
             .then((data) => {
                 setCustomer(data);
             });
-    }, []);
+    }, [id]);
     return (
         <>
             {notFound ? <p>The customer with id {id} was not found</p> : null}

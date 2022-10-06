@@ -7,6 +7,7 @@ import Definition from './Pages/Definition';
 import NewDictionary from './Pages/NewDictionary';
 import Page404 from './Pages/404';
 import Customer from './Pages/Customer';
+import Recaptcha from './Pages/Recaptcha';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/definition/:search" element={<Definition />} />
                     <Route path="/404" element={<Page404 />} />
                     <Route path="*" element={<Page404 />} />
+                    <Route path="/recaptcha" element={<Recaptcha />} />
                 </Routes>
                 
             </Header>

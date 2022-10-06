@@ -79,16 +79,20 @@ export default function Definition() {
             {word ? (
                 word.map((meaning) => {
                     return (
+                       
                         <li key={uuidv4()}>
                             {meaning.partOfSpeech +
                                 ': ' +
                                 meaning.definitions[0].definition}
                         </li>
+                        
+                        
                     );
                 })
             ) : (
                 <p>Loading ...</p>
             )}
+            <Link to="/NewDictionary">Search for a nother</Link>
         </>
     );
 }

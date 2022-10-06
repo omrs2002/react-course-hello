@@ -1,15 +1,16 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 //import NotFound from '../components/NotFound';
-//import { baseUrl } from '../shared';
+import { baseUrl } from '../shared';
 
 export default function Customer() {
     const { id } = useParams();
-    const navigate = useNavigate(); //not used
+    //const navigate = useNavigate(); //not used
     const [customer, setCustomer] = useState();
     const [notFound, setNotFound] = useState();
     useEffect(() => {
-        const url =  'https://localhost:7281/customers/' + id;
+        const url =  baseUrl+'Customers/' + id;
+        console.log(url);
         fetch(url)
             .then((response) => {
                 if (response.status === 404) {
@@ -20,7 +21,7 @@ export default function Customer() {
                 return response.json();
             })
             .then((data) => {
-                setCustomer(data.customer);
+                setCustomer(data);
             });
     }, []);
     return (

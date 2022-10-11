@@ -7,9 +7,7 @@ export default function Login() {
     const [password, setPassword] = useState();
     const location = useLocation();
     const navigate = useNavigate();
-    useEffect(()=>{
-        console.log('location.state.previosUrl',location.state.previosUrl);
-    });
+    
     function login(e) {
         e.preventDefault();
         const url = baseUrl + 'Users';
@@ -33,9 +31,6 @@ export default function Login() {
                 navigate( location?.state?.previousUrl
                     ? location.state.previousUrl
                     : '/customers');
-                //localStorage.setItem('refresh_token',data.refresh);
-                //console.log(localStorage);
-                //console.log(localStorage.getItem('access_token'));
             });
     }
 

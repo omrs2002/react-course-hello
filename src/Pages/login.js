@@ -30,7 +30,9 @@ export default function Login() {
                 
                 //console.log('access_token',data.value);
                 localStorage.setItem('access_token',data.value);
-                navigate(location.state.previosUrl);
+                navigate( location?.state?.previousUrl
+                    ? location.state.previousUrl
+                    : '/customers');
                 //localStorage.setItem('refresh_token',data.refresh);
                 //console.log(localStorage);
                 //console.log(localStorage.getItem('access_token'));

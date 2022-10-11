@@ -10,6 +10,7 @@ export default function Customer() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [customer, setCustomer] = useState();
+    const [tempCustomer, setTempCustomer] = useState();
     const [notFound, setNotFound] = useState();
     function callDelete() {
         const url = baseUrl + 'customers/' + id;
@@ -62,8 +63,28 @@ export default function Customer() {
             })
             .then((data) => {
                 setCustomer(data);
+                setTempCustomer(data);
             });
     }, [id]);
+    function updateCustomer() {
+        const url = baseUrl + 'Customers/';
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tempCustomer),
+        })
+            .then((response) => {
+                console.log(response);
+                console.log('response.ok',response.ok);
+                //return response;
+                if(response.ok)
+                    navigate('/customers');
+
+            })
+            .catch((e) => {console.log(e)});
+    }
     return (
         <>
             {notFound ? <p>The customer with id {id} was not found</p> : null}
@@ -71,13 +92,33 @@ export default function Customer() {
             {customer ? (
                 <>
                     <div>
-                        <p>{customer.id}</p>
-                        <p>{customer.name}</p>
-                        <p>{customer.industry}</p>
+                    <input
+                        className="m-2 block px-2"
+                        type="text"
+                        value={tempCustomer.name}
+                        onChange={(e) => {
+                            setTempCustomer({
+                                ...tempCustomer,
+                                name: e.target.value,
+                            });
+                        }}
+                    />
+                    <input
+                        className="m-2 block px-2"
+                        type="text"
+                        value={tempCustomer.industry}
+                        onChange={(e) => {
+                            setTempCustomer({
+                                ...tempCustomer,
+                                industry: e.target.value,
+                            });
+                        }}
+                    />
                     </div>
-                    <Button variant="danger" onClick={handleDelete}>
+                    <Button variant="danger"   className='m-2' onClick={handleDelete}>
                         Delete
                     </Button>
+                    <Button onClick={updateCustomer} className='m-2' variant="primary">Save</Button>
                     <br/>
                     <hr/>
                 </>

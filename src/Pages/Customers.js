@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //import { v4 as uuidv4 } from 'uuid';
 import Table from 'react-bootstrap/Table';
 import { baseUrl } from '../shared';
@@ -8,19 +8,38 @@ import AddCustomer from '../Component/AddCustomer';
 export default function Customers() {
     const [customers, setCustomers] = useState();
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     function toggleShow() {
         setShow(!show);
     }
 
     useEffect(() => {
-        //console.log('Fetching...');
-        
-        fetch( baseUrl+'Customers')
-            .then((response) => response.json())
+        fetch( baseUrl+'Customers',{
+            headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + localStorage.getItem('access_token')
+                }    
+        })
+            .then((response) => {
+                console.log(response);
+                if (response.status === 401) {
+                    navigate('/login');
+                }
+
+                return response.json();
+
+
+            })
             .then((data) => {
                 console.log(data);
                 setCustomers(data);
+            }).catch((e)=>
+            {
+
+                console.log(e.message);
+                if(e.message === 'Failed to fetch')
+                navigate('/login');
             });
     }, []);
 
@@ -31,6 +50,7 @@ export default function Customers() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('access_token')
             },
             body: JSON.stringify(data),
         })

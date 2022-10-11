@@ -8,7 +8,9 @@ const navigation = [
     { name: 'Employees', href: '/Employees' },
     { name: 'Customers', href: '/Customers' },
     { name: 'Dictionary', href: '/newdictionary' },
-    { name: 'recaptcha', href: '/recaptcha' }
+    { name: 'recaptcha', href: '/recaptcha' },
+    { name: 'Login', href: '/login' },
+
     
 ];
 

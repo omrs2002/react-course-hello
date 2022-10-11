@@ -8,6 +8,7 @@ import NewDictionary from './Pages/NewDictionary';
 import Page404 from './Pages/404';
 import Customer from './Pages/Customer';
 import Recaptcha from './Pages/Recaptcha';
+import Login from './Pages/login';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/404" element={<Page404 />} />
                     <Route path="*" element={<Page404 />} />
                     <Route path="/recaptcha" element={<Recaptcha />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
                 
             </Header>

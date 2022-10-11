@@ -18,6 +18,7 @@ export default function Customer() {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('access_token')
             },
         })
             .then((response) => {
@@ -52,7 +53,14 @@ export default function Customer() {
     useEffect(() => {
         const url = baseUrl + 'Customers/' + id;
         console.log(url);
-        fetch(url)
+        fetch(url,
+            {
+                headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer ' + localStorage.getItem('access_token')
+                    }    
+            }
+            )
             .then((response) => {
                 if (response.status === 404) {
                     //render a 404 component in this page
@@ -63,8 +71,14 @@ export default function Customer() {
             })
             .then((data) => {
                 setCustomer(data);
-                setTempCustomer(data);
+                setTempCustomer(data);})
+            .catch((e)=>
+            {
+                console.log(e.message);
+                if(e.message === 'Failed to fetch')
+                navigate('/login');
             });
+
     }, [id]);
     function updateCustomer() {
         const url = baseUrl + 'Customers/';
@@ -72,18 +86,24 @@ export default function Customer() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('access_token')
             },
             body: JSON.stringify(tempCustomer),
         })
             .then((response) => {
-                console.log(response);
-                console.log('response.ok',response.ok);
-                //return response;
+               
+                if (response.status === 401) {
+                    navigate('/login');
+                }
+                
                 if(response.ok)
                     navigate('/customers');
 
+                return response.json();
             })
-            .catch((e) => {console.log(e)});
+            .catch((e) => {
+                console.log(e);
+            });
     }
     return (
         <>

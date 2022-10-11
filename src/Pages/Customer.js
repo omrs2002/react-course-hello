@@ -5,6 +5,7 @@ import { baseUrl } from '../shared';
 import Button from 'react-bootstrap/Button';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { useLocation } from 'react-router-dom';
 
 export default function Customer() {
     const { id } = useParams();
@@ -12,6 +13,7 @@ export default function Customer() {
     const [customer, setCustomer] = useState();
     const [tempCustomer, setTempCustomer] = useState();
     const [notFound, setNotFound] = useState();
+    const location = useLocation();
     function callDelete() {
         const url = baseUrl + 'customers/' + id;
         fetch(url, {
@@ -76,7 +78,12 @@ export default function Customer() {
             {
                 console.log(e.message);
                 if(e.message === 'Failed to fetch')
-                navigate('/login');
+                navigate('/login',
+                {
+                    state:{
+                        previosUrl:location.pathname,
+                    }
+                });
             });
 
     }, [id]);
@@ -93,7 +100,12 @@ export default function Customer() {
             .then((response) => {
                
                 if (response.status === 401) {
-                    navigate('/login');
+                    navigate('/login',
+                    {
+                        state:{
+                            previosUrl:location.pathname,
+                        }
+                    });
                 }
                 
                 if(response.ok)

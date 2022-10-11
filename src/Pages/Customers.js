@@ -4,12 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import { baseUrl } from '../shared';
 import AddCustomer from '../Component/AddCustomer';
+import { useLocation } from 'react-router-dom';
 
 export default function Customers() {
     const [customers, setCustomers] = useState();
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
-
+    const location = useLocation();
+    
     function toggleShow() {
         setShow(!show);
     }
@@ -24,7 +26,13 @@ export default function Customers() {
             .then((response) => {
                 console.log(response);
                 if (response.status === 401) {
-                    navigate('/login');
+                    navigate('/login',
+                    {
+                        state:{
+                            previosUrl:location.pathname,
+                        }
+                    }
+                    );
                 }
 
                 return response.json();
@@ -39,7 +47,13 @@ export default function Customers() {
 
                 console.log(e.message);
                 if(e.message === 'Failed to fetch')
-                navigate('/login');
+                navigate('/login',
+                    {
+                        state:{
+                            previosUrl:location.pathname,
+                        }
+                    }
+                    );
             });
     }, []);
 

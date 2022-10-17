@@ -1,8 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
-//import { Fragment } from 'react';
+import { useContext, useEffect } from 'react';
+
 import { Disclosure } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { NavLink } from 'react-router-dom';
+import { LoginContext } from '../App';
 
 const navigation = [
     { name: 'Employees', href: '/Employees' },
@@ -19,6 +21,14 @@ const navigation = [
 // }
 
 export default function Header(props) {
+
+    const loggedIn = useContext(LoginContext);
+    
+
+    useEffect(()=>{
+        console.log('loggedIn',loggedIn);    
+    });
+
     return (
         <>
             <Disclosure as="nav" className="bg-gray-800">
@@ -55,6 +65,7 @@ export default function Header(props) {
                                                     className={({
                                                         isActive,
                                                     }) => {
+                                                        
                                                         return (
                                                             'px-3 py-2 rounded-md text-sm font-medium no-underline ' +
                                                             (!isActive
@@ -66,6 +77,11 @@ export default function Header(props) {
                                                     {item.name}
                                                 </NavLink>
                                             ))}
+                                            <NavLink
+                                                to={loggedIn ? '/logout' : '/login'}
+                                                className="block px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white" >
+                                                    {loggedIn ? 'Logout' : 'Login'}
+                                            </NavLink>
                                         </div>
                                     </div>
                                 </div>

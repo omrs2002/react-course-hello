@@ -54,7 +54,7 @@ export default function Customer() {
     }
     useEffect(() => {
         const url = baseUrl + 'Customers/' + id;
-        console.log(url);
+        //console.log(url);
         fetch(url,
             {
                 headers: {

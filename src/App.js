@@ -1,4 +1,5 @@
 import './Index.css';
+import { createContext, useEffect, useState } from 'react';
 import Employees from './Pages/Employees';
 import Header from '../src/Component/Header';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
@@ -10,9 +11,15 @@ import Customer from './Pages/Customer';
 import Recaptcha from './Pages/Recaptcha';
 import Login from './Pages/login';
 
+export const LoginContext = createContext();
+
+
 function App() {
+    const [loggedIn,setLoggedIn] = useState(true);
+
     return (
     <>
+        <LoginContext.Provider  value={[loggedIn,setLoggedIn]}>
          <BrowserRouter>
             <Header>
                 <Routes>
@@ -29,6 +36,7 @@ function App() {
                 
             </Header>
         </BrowserRouter>
+        </LoginContext.Provider>
     </>)
     ;
 }

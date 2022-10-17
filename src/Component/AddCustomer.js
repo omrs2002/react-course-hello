@@ -40,7 +40,7 @@ export default function AddCustomer(props) {
                                 alert('plz fill data!');
                                 return false;
                               }
-                            console.log('hellow from Add emp.');
+                            //console.log('hellow from Add emp.');
                             setName('');
                             setIndustry('');
                             props.newCustomer(name, industry);

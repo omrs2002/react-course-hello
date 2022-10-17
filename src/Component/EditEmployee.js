@@ -30,7 +30,7 @@ function EditEmployee(props) {
                     <form id="editmodal" className="w-full max-w-sm"
                     onSubmit={(e) => {
                         e.preventDefault();
-                        console.log('hellow from edit emp.');
+                        //console.log('hellow from edit emp.');
                         props.updateEmployee(props.id,name,role);
                         setShow(false);
 

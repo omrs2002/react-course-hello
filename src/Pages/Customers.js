@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 //import { v4 as uuidv4 } from 'uuid';
 import Table from 'react-bootstrap/Table';
 import { baseUrl } from '../shared';
 import AddCustomer from '../Component/AddCustomer';
 import { useLocation } from 'react-router-dom';
+import { LoginContext } from '../App';
+
 
 export default function Customers() {
     const [customers, setCustomers] = useState();
     const [show, setShow] = useState(false);
+    
+    const [loggedIn,setLoggedIn] = useContext(LoginContext);
+
     const navigate = useNavigate();
     const location = useLocation();
     
@@ -24,8 +29,9 @@ export default function Customers() {
                 }    
         })
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 if (response.status === 401) {
+                    setLoggedIn(false);
                     navigate('/login',
                     {
                         state:{
@@ -40,20 +46,23 @@ export default function Customers() {
 
             })
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 setCustomers(data);
             }).catch((e)=>
             {
 
                 console.log(e.message);
                 if(e.message === 'Failed to fetch')
-                navigate('/login',
-                    {
-                        state:{
-                            previosUrl:location.pathname,
+                {
+                    setLoggedIn(false);
+                    navigate('/login',
+                        {
+                            state:{
+                                previosUrl:location.pathname,
+                            }
                         }
-                    }
-                    );
+                        );
+                }
             });
     }, []);
 

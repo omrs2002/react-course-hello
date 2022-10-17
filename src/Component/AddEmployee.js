@@ -39,7 +39,7 @@ function AddEmployee(props) {
                                 alert('plz fill data!');
                                 return false;
                               }
-                            console.log('hellow from Add emp.');
+                            //console.log('hellow from Add emp.');
                             setName('');
                             setRole('');
                             setImg('');

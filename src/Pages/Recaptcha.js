@@ -1,13 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
+import { baseUrl } from '../shared';
 
 export default function Recaptcha() {
     const [captchaUserInput, SetCaptchaUserInput] = useState();
     const [captcha, SetCaptcha] = useState();
     const [refresh, SetRefresh] = useState(false);
+    const [result, setResult] = useState('');
 
     useEffect(() => {
-        let url = 'https://localhost:7164/Captcha/get-captcha';
+        let url = baseUrl +'Captcha/get-captcha';
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
@@ -26,7 +28,7 @@ export default function Recaptcha() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let url = `https://localhost:7164/Captcha/validate-captcha?userInputCaptcha=${captchaUserInput}&captchaEncrypted=${captcha.encryptedCaptchaCode}`;
+        let url = baseUrl +`Captcha/validate-captcha?userInputCaptcha=${captchaUserInput}&captchaEncrypted=${captcha.encryptedCaptchaCode}`;
 
         fetch(url)
             .then((response) => {
@@ -38,9 +40,15 @@ export default function Recaptcha() {
             .then((data) => {
                 //console.log(data);
                 if (data) 
+                {
                     console.log('Valid✅');
+                    setResult('true');
+                }
                 else 
-                    console.log('In Valid 🍺');
+                    {
+                        console.log('In Valid 🍺');
+                        setResult('false');
+                    }
 
                 SetRefresh(!refresh);
             })
@@ -83,7 +91,9 @@ export default function Recaptcha() {
                         &nbsp;&nbsp;
                         <Button type="submit" variant="primary">
                             Validate Captcha
-                        </Button>{' '}
+                        </Button>
+                        &nbsp;&nbsp;
+                        <span>Result:{result}</span>
                     </div>
                 </>
             ) : (

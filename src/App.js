@@ -36,6 +36,7 @@ function App() {
          <BrowserRouter>
             <Header>
                 <Routes>
+                    <Route path="/" element={<Employees />} />
                    <Route path="/employees" element={<Employees />} />
                    <Route path="/newdictionary" element={<NewDictionary />} />
                     <Route path="/customers" element={<Customers />} />

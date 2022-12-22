@@ -12,7 +12,7 @@ export default function Customers() {
     const [customers, setCustomers] = useState();
     const [show, setShow] = useState(false);
     
-    const [loggedIn,setLoggedIn] = useContext(LoginContext);
+    const [loggedIn,changeLoggedIn] = useContext(LoginContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,6 +22,8 @@ export default function Customers() {
     }
 
     useEffect(() => {
+        console.log('loggedIn',loggedIn);
+        console.log('localStorage(access_token)',localStorage.getItem('access_token'));
         fetch( baseUrl+'Customers',{
             headers: {
                     'Content-Type': 'application/json',
@@ -31,7 +33,7 @@ export default function Customers() {
             .then((response) => {
                 //console.log(response);
                 if (response.status === 401) {
-                    setLoggedIn(false);
+                    changeLoggedIn(false);
                     navigate('/login',
                     {
                         state:{
@@ -54,7 +56,7 @@ export default function Customers() {
                 console.log(e.message);
                 if(e.message === 'Failed to fetch')
                 {
-                    setLoggedIn(false);
+                    changeLoggedIn(false);
                     navigate('/login',
                         {
                             state:{

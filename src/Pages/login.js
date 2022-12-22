@@ -37,6 +37,10 @@ export default function Login() {
                 navigate( location?.state?.previousUrl
                     ? location.state.previousUrl
                     : '/customers');
+            }).catch((e)=>
+            {
+
+                console.log(e.message);
             });
     }
 

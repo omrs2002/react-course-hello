@@ -11,9 +11,6 @@ const navigation = [
     { name: 'Customers', href: '/Customers' },
     { name: 'Dictionary', href: '/newdictionary' },
     { name: 'recaptcha', href: '/recaptcha' },
-    { name: 'Login', href: '/login' },
-
-    
 ];
 
 // function classNames(...classes) {
@@ -22,11 +19,11 @@ const navigation = [
 
 export default function Header(props) {
 
-    const loggedIn = useContext(LoginContext);
+    const loggedIn = useContext(LoginContext)[0];
     
 
     useEffect(()=>{
-        console.log('loggedIn',loggedIn);    
+        console.log('loggedIn from header:',loggedIn);    
     });
 
     return (
@@ -77,11 +74,19 @@ export default function Header(props) {
                                                     {item.name}
                                                 </NavLink>
                                             ))}
-                                            <NavLink
-                                                to={loggedIn ? '/logout' : '/login'}
+                                            {loggedIn ? 
+                                            (<NavLink
+                                                to={'/logout'}
                                                 className="block px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white" >
-                                                    {loggedIn ? 'Logout' : 'Login'}
-                                            </NavLink>
+                                                    Logout
+                                            </NavLink>)
+                                            :
+                                            (<NavLink
+                                                to={'/login'}
+                                                className="block px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white" >
+                                                     Login
+                                            </NavLink>)
+                                            }
                                         </div>
                                     </div>
                                 </div>

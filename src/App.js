@@ -17,15 +17,17 @@ export const LoginContext = createContext();
 
 
 function App() {
-   
+   console.log('localStorage.getItem(access_token) from app:',localStorage.getItem('access_token'));
+
     const [loggedIn, setLoggedIn] = useState(
-        localStorage.access ? true : false
+        localStorage.getItem('access_token') ? true : false
     );
 
     function changeLoggedIn(value) {
         setLoggedIn(value);
         if (value === false) {
             localStorage.clear();
+            
         }
     }
 

@@ -7,6 +7,7 @@ import Customers from './Pages/Customers';
 import Definition from './Pages/Definition';
 import NewDictionary from './Pages/NewDictionary';
 import Page404 from './Pages/404';
+import Welcome  from './Pages/Welcome';
 import Customer from './Pages/Customer';
 import Recaptcha from './Pages/Recaptcha';
 import Login from './Pages/login';
@@ -27,7 +28,6 @@ function App() {
         setLoggedIn(value);
         if (value === false) {
             localStorage.clear();
-            
         }
     }
 
@@ -45,7 +45,7 @@ function App() {
                     <Route path="/customer/:id" element={<Customer />} />
                     <Route path="/definition/:search" element={<Definition />} />
                     <Route path="/404" element={<Page404 />} />
-                    <Route path="*" element={<Page404 />} />
+                    <Route path="*" element={<Welcome />} />
                     <Route path="/recaptcha" element={<Recaptcha />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>

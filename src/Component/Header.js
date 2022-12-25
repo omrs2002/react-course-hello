@@ -19,8 +19,8 @@ const navigation = [
 
 export default function Header(props) {
 
-    const loggedIn = useContext(LoginContext)[0];
-    
+    //const loggedIn = useContext(LoginContext)[0];
+    const [loggedIn,changeLoggedIn] = useContext(LoginContext);
 
     useEffect(()=>{
         console.log('loggedIn from header:',loggedIn);    
@@ -77,6 +77,10 @@ export default function Header(props) {
                                             {loggedIn ? 
                                             (<NavLink
                                                 to={'/logout'}
+                                                onClick={()=>{
+                                                    console.log('logging out ...');
+                                                    changeLoggedIn(false);
+                                                }}
                                                 className="block px-3 py-2 rounded-md text-base font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white" >
                                                     Logout
                                             </NavLink>)

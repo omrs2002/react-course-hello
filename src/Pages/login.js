@@ -7,15 +7,15 @@ export default function Login() {
     
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
 
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
     
 
     function login(e) {
         e.preventDefault();
-        const url = baseUrl + 'Users';
+        const url = baseUrl + 'Users/token';
         fetch(url, {
             method: 'POST',
             headers: {
@@ -30,10 +30,12 @@ export default function Login() {
                 return response.json();
             })
             .then((data) => {
-                
-                console.log('access_token',data.value);
-                localStorage.setItem('access_token',data.value);
-                setLoggedIn(true);
+                console.log('login response',data);
+                 console.log('access_token',data.token);
+                 console.log('refresh_token',data.refreshToken);
+                 localStorage.setItem('access_token',data.token);
+                 localStorage.setItem('refresh_token',data.refreshToken);
+                 setLoggedIn(true);
                 navigate( location?.state?.previousUrl
                     ? location.state.previousUrl
                     : '/customers');

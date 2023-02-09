@@ -5,14 +5,14 @@ import Table from 'react-bootstrap/Table';
 import { baseUrl } from '../shared';
 import AddCustomer from '../Component/AddCustomer';
 import { useLocation } from 'react-router-dom';
-import { LoginContext } from '../App';
+//import { LoginContext } from '../App';
 
 
 export default function Customers() {
     const [customers, setCustomers] = useState();
     const [show, setShow] = useState(false);
     
-    const [loggedIn,changeLoggedIn] = useContext(LoginContext);
+    //const [loggedIn,changeLoggedIn] = useContext(LoginContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,7 +22,7 @@ export default function Customers() {
     }
 
     useEffect(() => {
-        console.log('loggedIn',loggedIn);
+        //console.log('loggedIn',loggedIn);
         console.log('localStorage(access_token)',localStorage.getItem('access_token'));
         fetch( baseUrl+'Customers',{
             headers: {
@@ -33,7 +33,7 @@ export default function Customers() {
             .then((response) => {
                 //console.log(response);
                 if (response.status === 401) {
-                    changeLoggedIn(false);
+                    //changeLoggedIn(false);
                     navigate('/login',
                     {
                         state:{
@@ -56,7 +56,7 @@ export default function Customers() {
                 console.log(e.message);
                 if(e.message === 'Failed to fetch')
                 {
-                    changeLoggedIn(false);
+                    //changeLoggedIn(false);
                     navigate('/login',
                         {
                             state:{

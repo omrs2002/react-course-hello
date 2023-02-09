@@ -1,5 +1,5 @@
 import './Index.css';
-import { createContext,  useState } from 'react';
+import { createContext,  useState, useEffect } from 'react';
 import Employees from './Pages/Employees';
 import Header from '../src/Component/Header';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
@@ -11,14 +11,46 @@ import Welcome  from './Pages/Welcome';
 import Customer from './Pages/Customer';
 import Recaptcha from './Pages/Recaptcha';
 import Login from './Pages/login';
-
+import { baseUrl } from './shared';
 export const LoginContext = createContext();
-
-
-
 
 function App() {
    console.log('localStorage.getItem(access_token) from app:',localStorage.getItem('access_token'));
+   useEffect(() => {
+    function refreshTokens() {
+        
+        var curr_ref = localStorage.getItem('refresh_token');
+        console.log('refresh token refill ...', curr_ref);
+        if (curr_ref!=null && curr_ref!=='' && curr_ref!=='null') {
+            const url = baseUrl + 'Users/refreshToken';
+            console.log('url',url);
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    Token: curr_ref,
+                }),
+            })
+             .then((response) => {
+                
+                    //revokeRefreshTokens(curr_ref);
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('access_token refilled!');
+                    localStorage.setItem('access_token',data.token);
+                    localStorage.setItem('refresh_token',data.refreshToken);
+                    setLoggedIn(true);
+                });
+        }
+    }
+    const seconds = 1000 * 50;
+    refreshTokens();
+    setInterval(refreshTokens, seconds);
+}, []);
+
 
     const [loggedIn, setLoggedIn] = useState(
         localStorage.getItem('access_token') ? true : false
@@ -27,7 +59,8 @@ function App() {
     function changeLoggedIn(value) {
         setLoggedIn(value);
         if (value === false) {
-            localStorage.clear();
+            //localStorage.clear();
+            localStorage.setItem('access_token',null);
         }
     }
 

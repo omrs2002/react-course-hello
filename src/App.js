@@ -46,9 +46,9 @@ function App() {
                 });
         }
     }
-    const seconds = 1000 * 50;
+    const Minuts = (1000 * 60) * 1 ;//15 Minuts
     refreshTokens();
-    setInterval(refreshTokens, seconds);
+    setInterval(refreshTokens, Minuts);
 }, []);
 
 
@@ -59,8 +59,8 @@ function App() {
     function changeLoggedIn(value) {
         setLoggedIn(value);
         if (value === false) {
-            //localStorage.clear();
-            localStorage.setItem('access_token',null);
+            localStorage.clear();
+            //localStorage.setItem('access_token',null);
         }
     }
 

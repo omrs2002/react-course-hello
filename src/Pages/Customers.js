@@ -31,8 +31,8 @@ export default function Customers() {
                 }    
         })
             .then((response) => {
-                //console.log(response);
-                if (response.status === 401) {
+                console.log('Get customers response:',response);
+                if (response.status === 401 || response.status === 204) {
                     //changeLoggedIn(false);
                     navigate('/login',
                     {
@@ -52,9 +52,12 @@ export default function Customers() {
                 setCustomers(data);
             }).catch((e)=>
             {
-
-                console.log(e.message);
-                if(e.message === 'Failed to fetch')
+                console.log('Get customers response:',e.message);
+                if
+                (
+                    e.message === 'Failed to fetch' || 
+                    e.message === 'NetworkError when attempting to fetch resource.'
+                )
                 {
                     //changeLoggedIn(false);
                     navigate('/login',

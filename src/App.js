@@ -12,6 +12,7 @@ import Customer from './Pages/Customer';
 import Recaptcha from './Pages/Recaptcha';
 import Login from './Pages/login';
 import { baseUrl } from './shared';
+import Register from './Pages/Register';
 export const LoginContext = createContext();
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
                     <Route path="/404" element={<Page404 />} />
                     <Route path="*" element={<Welcome />} />
                     <Route path="/recaptcha" element={<Recaptcha />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>
                 
